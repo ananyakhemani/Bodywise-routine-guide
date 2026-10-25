@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bodywise Routine Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F6F6FB;--card:#fff;--ink:#23223A;--mute:#66647F;--line:#E1E0EE;--acc:#1B8F7C;--accbg:#DDF3EE;--warn:#B8700F;--warnbg:#FBEBD0;--bad:#B63252;--badbg:#F9DDE4;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14141F;--card:#1E1E2D;--ink:#ECECF6;--mute:#A3A1BD;--line:#34344A;--acc:#4DC9B3;--accbg:#173A36;--warn:#E8A94A;--warnbg:#3A2C14;--bad:#F08AA2;--badbg:#3B1A25}}
+:root[data-theme="dark"]{--bg:#14141F;--card:#1E1E2D;--ink:#ECECF6;--mute:#A3A1BD;--line:#34344A;--acc:#4DC9B3;--accbg:#173A36;--warn:#E8A94A;--warnbg:#3A2C14;--bad:#F08AA2;--badbg:#3B1A25}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;line-height:1.15;margin:0}
+main{max-width:640px;margin:0 auto;padding:22px 18px 60px}
+h1{font-size:30px;margin-bottom:8px}h2{font-size:21px;margin:30px 0 10px}h3{font-size:16px;margin:0 0 6px}
+.sub{color:var(--mute);margin:0 0 20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.prod{display:flex;flex-direction:column;gap:2px;text-align:left;font:inherit;color:inherit;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;cursor:pointer}
+.prod b{font-size:16px}.prod span{color:var(--mute);font-size:13px}
+.prod:hover,.prod:focus-visible{border-color:var(--acc)}
+button:focus-visible,input:focus-visible,label:focus-within{outline:2px solid var(--acc);outline-offset:2px}
+.q{margin:0 0 18px}.q p{margin:0 0 8px;font-weight:600}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts label{border:1px solid var(--line);background:var(--card);border-radius:20px;padding:7px 14px;cursor:pointer;font-size:15px}
+.opts input{position:absolute;opacity:0;pointer-events:none}
+.opts label:has(input:checked){background:var(--accbg);border-color:var(--acc);font-weight:600}
+.btn{font:inherit;font-weight:600;background:var(--acc);color:#fff;border:0;border-radius:10px;padding:11px 18px;cursor:pointer}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn{color:#0B2723}}
+.btn.ghost{background:transparent;color:var(--mute);border:1px solid var(--line)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+ul{margin:0;padding-left:20px}li{margin:4px 0}
+.tag{display:inline-block;font-size:13px;font-weight:600;border-radius:6px;padding:2px 8px;margin-bottom:8px}
+.ok{background:var(--accbg);color:var(--acc)}.wn{background:var(--warnbg);color:var(--warn)}.bd{background:var(--badbg);color:var(--bad)}
+.strip{display:flex;gap:4px;margin:12px 0 6px}
+.seg{flex:1;height:10px;border-radius:5px;background:var(--line)}
+.seg.past{background:var(--acc);opacity:.45}.seg.now{background:var(--acc)}
+.segl{display:flex;gap:4px;font-size:11px;color:var(--mute)}.segl span{flex:1;text-align:center}
+.now-box{background:var(--accbg);border-radius:10px;padding:12px 14px;margin-top:10px}
+.feel{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.feel button{font:inherit;font-size:14px;color:inherit;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:7px 13px;cursor:pointer}
+.feel button[aria-pressed="true"]{background:var(--accbg);border-color:var(--acc);font-weight:600}
+input[type=date],select{font:inherit;color:inherit;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:7px 10px}
+.log{border-top:1px solid var(--line);padding:9px 0;font-size:14px}.log:first-child{border-top:0}
+.small{font-size:13px;color:var(--mute)}
+.hide{display:none}
+</style></head><body><main>
+<h1>Your routine guide</h1>
+<p class="sub">Tell us what you use. Get the right amount, timing and pairing for you, and an honest timeline for when to expect results.</p>
+<div id="app"></div>
+<p class="small" style="margin-top:36px">A concept built for Be Bodywise customers. It gives general guidance, not medical advice. Always follow the product label, and see a doctor for persistent irritation. Your answers stay on this device only; the app asks for no name or contact details.</p>
+</main>
+<script>
+const P={
+face:{name:"Face wash",note:"Acne and oil control",qs:[
+ {id:"skin",q:"Your skin type",o:[["oily","Oily"],["combo","Combination"],["dry","Dry or sensitive"]]},
+ {id:"act",q:"Do you use an acne cream or retinoid?",o:[["no","No"],["yes","Yes"],["unsure","Not sure"]]},
+ {id:"cl",q:"Weather right now",o:[["hot","Hot or humid"],["mild","Mild"],["cold","Cold and dry"]]}],
+ plan(a){const u=["Use a pea to coin-sized amount. Massage for 30 to 40 seconds, then rinse with cool or lukewarm water."];
+  u.push(a.skin==="dry"?"Start with night only for the first 2 weeks. Add mornings if your skin feels comfortable.":"Use it morning and night.");
+  const w=[],av=["Washing more than twice a day. It dries the skin and does not clear pimples faster."],pr=["A light moisturizer straight after washing","Sunscreen in the morning"];
+  if(a.act==="yes")pr.push("Apply your acne cream after your face is fully dry, ideally at night, not together with a new active");
+  if(a.act==="unsure")w.push("Check your acne product’s label for acids or retinoids. If it has them, use this face wash at night only to start.");
+  if(a.act==="yes")w.push("If your cream is prescribed, ask your doctor before adding this face wash.");
+  if(a.skin==="dry")w.push("Do a patch test on your jaw for 2 days before full use.");
+  if(a.cl==="cold")pr.push("Moisturize twice a day in cold weather");
+  w.push("Change one thing at a time. If you add or swap products, wait 1 to 2 weeks before judging.");return{u,pr,av,w}},
+ ph:[[0,7,"Adjusting","Mild dryness is common. Some people see a few extra pimples. Keep to the plan and moisturize."],[8,21,"Settling","Skin usually settles. Watch new pimples, not old marks."],[22,56,"Results window","Many people notice less oil and fewer new pimples from about weeks 3 to 4. Count new pimples weekly."],[57,999,"Steady use","Keep a routine that your skin tolerates. Check the pack for the brand’s stated timeline."]],
+ main:"new pimples"},
+shampoo:{name:"Shampoo",note:"Hair fall and scalp",qs:[
+ {id:"con",q:"Main concern",o:[["fall","Hair fall"],["dand","Dandruff"],["oil","Oily scalp"]]},
+ {id:"hair",q:"Hair type",o:[["dry","Dry or frizzy"],["norm","Normal"],["oily","Oily"]]},
+ {id:"sea",q:"Is the season changing right now?",o:[["y","Yes"],["n","No"]]}],
+ plan(a){const u=["Wash 2 to 3 times a week. Put a small amount on the scalp, massage for 2 minutes, leave for 2 to 3 minutes, rinse well.","Apply conditioner on the lengths, not the scalp."];
+  if(a.con==="oil")u[0]="Wash 3 times a week, or whenever your scalp feels oily. Put a small amount on the scalp, massage for 2 minutes, rinse well.";
+  const pr=["Conditioner on the lengths. Hair can feel rough without it"],av=["Judging after 1 or 2 washes. Hair cycles are slow."],w=["Take a note of how many hairs are on your comb on the same day each week, so you are comparing like with like."];
+  if(a.hair==="dry")pr.push("A lighter wash schedule or a milder shampoo on alternate washes");
+  if(a.sea==="y")w.push("Hair often sheds more when seasons change. Improvement during a season change may not be only the shampoo, so give it 6 to 8 weeks.");
+  if(a.con==="dand")w.push("Dandruff often reduces rather than disappears. Keep using it on a schedule and check the pack. If your scalp is red or itchy, see a doctor.");return{u,pr,av,w}},
+ ph:[[0,14,"Too early to judge","Scalp feel changes first. One or two washes say little about hair fall."],[15,42,"Scalp changes","Oiliness and flakes may change first. Keep your weekly comb count."],[43,84,"Hair-fall window","6 to 8 weeks is the earliest fair test for hair fall."],[85,999,"Steady use","Compare your comb counts from week 1 and now."]],
+ main:"hair fall or scalp"},
+roll:{name:"Underarm roll-on",note:"Smell and underarm care",qs:[
+ {id:"hr",q:"Hair removal",o:[["today","Shaved or waxed today"],["recent","Within the last 2 days"],["none","Not recently"]]},
+ {id:"sens",q:"Skin sensitivity",o:[["n","Normal"],["y","Sensitive"]]},
+ {id:"act",q:"On most days you are",o:[["gym","Active or sweating a lot"],["reg","Regular day"]]}],
+ plan(a){const u=["Apply once a day after bathing, to fully dry underarms.","Wait about 1 minute for it to dry before you put on clothes. This helps avoid marks on fabric."];
+  const pr=["Loose, breathable clothes on hot days"],av=["Dressing before it is dry"],w=[];
+  if(a.hr==="today")w.push("You shaved or waxed today. Skip the roll-on for now and start tomorrow, once the skin settles. If skin is red or stinging, wait longer.");
+  else if(a.hr==="recent")w.push("Skin may still be sensitive. Start with a small area and stop if it stings.");
+  else w.push("After you shave or wax, leave a gap of about a day before using it.");
+  if(a.sens==="y")w.push("Do a patch test on a small area for 2 days first.");
+  if(a.act==="gym")u.push("On sweaty days you may need to reapply later in the day.");
+  w.push("Stop if you feel burning, redness or itching that does not go away.");return{u,pr,av,w}},
+ ph:[[0,7,"Odour control first","Smell control usually shows within the first days. Tingling after hair removal is the main thing to watch."],[8,28,"Settling","Your routine should now feel easy. Keep the one-day gap after hair removal."],[29,84,"Tone window","Change in underarm tone is gradual and differs for each person. Check the pack for the brand’s stated timeline."],[85,999,"Steady use","Compare today with your photo or note from day 1."]],
+ main:"underarm tone and smell"},
+wash:{name:"Body wash",note:"Fresh feel and fragrance",qs:[
+ {id:"skin",q:"Your skin",o:[["dry","Dry"],["norm","Normal"],["oily","Oily or body acne"]]},
+ {id:"fr",q:"Fragrance you like",o:[["strong","Strong"],["light","Light"],["none","Very mild or none"]]},
+ {id:"tool",q:"You use",o:[["loofah","A loofah or pouf"],["hands","Your hands"]]}],
+ plan(a){const u=[a.tool==="loofah"?"Start with 1 pump on the loofah and add a second only if needed. It lathers a lot, so a little goes a long way.":"Start with 1 pump in your hands. It lathers a lot, so a little goes a long way.","Massage for about 30 seconds, then rinse."];
+  const pr=[],av=["Using extra because the lather looks thin. It is meant to lather easily."],w=[];
+  if(a.skin==="dry")pr.push("Moisturizer within 3 minutes of drying off");
+  if(a.skin==="oily")pr.push("Rinse well, especially on the back and chest");
+  if(a.fr!=="strong")w.push("This fragrance can feel strong. Use a smaller amount and rinse well, or try it on hands before the loofah.");
+  if(a.fr==="none")w.push("Patch test first, and look for a fragrance-free or mild option if the smell bothers you.");
+  w.push("In cold weather skin can feel dry after a wash. Add lotion.");return{u,pr,av,w}},
+ ph:[[0,7,"Finding your amount","Adjust the pumps so that you feel clean, not stripped."],[8,28,"Skin settling","Notice how skin feels an hour after your shower."],[29,999,"Routine","If you want to target body acne or dullness, change one thing at a time and give it a few weeks."]],
+ main:"skin feel"},
+lotion:{name:"Body lotion",note:"Dry skin care",qs:[
+ {id:"dry",q:"How dry is your skin?",o:[["mild","A little dry"],["dry","Dry"],["vdry","Very dry or flaky"]]},
+ {id:"sea",q:"Season",o:[["summer","Summer or humid"],["mon","Monsoon or mild"],["win","Winter"]]},
+ {id:"habit",q:"Hot showers?",o:[["y","Yes, often"],["n","Warm or cool"]]}],
+ plan(a){const u=["Apply within a few minutes of bathing, while skin is still slightly damp.",a.dry==="mild"?"Once a day is enough.":"Once a day, and again at night on very dry areas. Add extra on elbows and knees."];
+  const pr=[],av=["Rubbing in a very large amount on soaked skin. It can feel sticky."],w=[];
+  if(a.sea==="win")pr.push("In winter, layer a richer cream over the lotion or use one at night");
+  if(a.sea==="summer")pr.push("A light layer is usually enough. Use sunscreen for sun exposure since this lotion may not give SPF");
+  if(a.dry==="vdry")w.push("If skin is cracked, itchy or red, see a doctor, since a lotion may not be enough.");
+  if(a.habit==="y")av.push("Very hot showers. They strip oils, and lotion has to work harder.");
+  w.push("Hold time shortens in winter. That is normal and does not mean the lotion has failed.");return{u,pr,av,w}},
+ ph:[[0,3,"Finding your fit","See how long skin stays soft. Reapply when it starts to feel tight."],[4,28,"Season check","Compare how it works as the weather changes."],[29,999,"Steady use","Change the layering as the season changes."]],
+ main:"skin softness"}};
+const FEEL=[["good","All good"],["dry","Dry or tight"],["tingle","Tingling or burning"],["red","Redness or itching"],["break","More breakouts"]];
+const K="bwguide_v1";let S=load();
+function load(){try{return JSON.parse(localStorage.getItem(K))||{}}catch(e){return{}}}
+function save(){try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}}
+const $=s=>document.querySelector(s),A=$("#app");
+const esc=s=>String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const today=()=>new Date().toISOString().slice(0,10);
+const dayN=()=>Math.max(1,Math.floor((new Date(today())-new Date(S.start))/864e5)+1);
+function home(){A.innerHTML=`<h2 style="margin-top:6px">Which product are you using?</h2><div class="grid">${Object.entries(P).map(([k,p])=>`<button class="prod" data-k="${k}"><b>${p.name}</b><span>${p.note}</span></button>`).join("")}</div>`;
+ A.querySelectorAll(".prod").forEach(b=>b.onclick=()=>ask(b.dataset.k))}
+function ask(k){const p=P[k];A.innerHTML=`<h2 style="margin-top:6px">${p.name}: a few quick questions</h2><p class="sub">These shape your plan. Nothing here is shared.</p>${p.qs.map(q=>`<div class="q"><p>${q.q}</p><div class="opts">${q.o.map(o=>`<label><input type="radio" name="${q.id}" value="${o[0]}">${o[1]}</label>`).join("")}</div></div>`).join("")}<div class="q"><p>When did you start using it?</p><input type="date" id="st" value="${today()}" max="${today()}"></div><div class="row"><button class="btn" id="go">Get my plan</button><button class="btn ghost" id="bk">Back</button></div><p class="small hide" id="er">Please answer every question.</p>`;
+ $("#bk").onclick=home;$("#go").onclick=()=>{const a={};p.qs.forEach(q=>{const c=document.querySelector(`input[name=${q.id}]:checked`);if(c)a[q.id]=c.value});if(Object.keys(a).length<p.qs.length){$("#er").classList.remove("hide");return}
+  S={k,a,start:$("#st").value||today(),log:[]};save();view()}}
+const list=(t,arr,cls)=>arr.length?`<div class="card"><span class="tag ${cls}">${t}</span><ul>${arr.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`:"";
+function advice(f,d){const m={good:["ok","Good. Keep to your plan and log again in a few days."],
+ dry:["wn",d<=7?"Mild dryness in the first week is common. Moisturize and, if it persists, use the product less often.":"Cut back on how often you use it and add a moisturizer. If dryness stays for more than a week, pause and speak to a pharmacist or doctor."],
+ tingle:["bd","Rinse the area with water and stop using it for now. If the tingling or burning does not go away, see a doctor. Restart only when the skin is calm, and use less often."],
+ red:["bd","Pause the product. Redness or itching that lasts can mean a reaction. Check the label for ingredients that you react to and see a doctor if it persists."],
+ break:[d<=14?"wn":"bd",d<=14?"Some people see a short adjustment phase in the first 2 weeks. Keep your log and avoid adding anything new. If it gets worse, pause.":"By now this is worth acting on. Pause for a few days, change nothing else, and see a dermatologist if breakouts continue."]}[f];return m}
+function view(){const p=P[S.k],d=dayN(),pl=p.plan(S.a),ph=p.ph,ci=ph.findIndex(x=>d>=x[0]&&d<=x[1]),cur=ph[ci<0?ph.length-1:ci];
+ A.innerHTML=`<div class="row" style="justify-content:space-between"><h2 style="margin:6px 0">${p.name}: your plan</h2><button class="btn ghost" id="re">Start over</button></div>
+ ${list("How to use it",pl.u,"ok")}${list("Pair it with",pl.pr,"ok")}${list("Avoid",pl.av,"wn")}${list("Watch out for",pl.w,"bd")}
+ <h2>When to expect results</h2><div class="card"><div class="small">Day ${d}</div><div class="strip">${ph.map((x,i)=>`<div class="seg ${i<(ci<0?ph.length-1:ci)?"past":i===(ci<0?ph.length-1:ci)?"now":""}"></div>`).join("")}</div><div class="segl">${ph.map(x=>`<span>${x[2]}</span>`).join("")}</div>
+ <div class="now-box"><b>Where you are: ${cur[2]}</b><br>${cur[3]}</div><p class="small" style="margin:10px 0 0">Timelines are typical, not promises. Results differ by person and season.</p></div>
+ <h2>Check in</h2><div class="card"><h3>How does your skin feel today?</h3><div class="feel" id="fl">${FEEL.map(f=>`<button aria-pressed="false" data-f="${f[0]}">${f[1]}</button>`).join("")}</div>
+ <h3 style="margin-top:14px">Compared with day 1, your ${p.main} is</h3><select id="rt"><option value="">Skip</option><option value="1">Worse</option><option value="2">A bit worse</option><option value="3">Same</option><option value="4">A bit better</option><option value="5">Much better</option></select>
+ <div class="opts" style="margin:12px 0"><label><input type="checkbox" id="c1">The season changed</label><label><input type="checkbox" id="c2">I started another product</label></div>
+ <button class="btn" id="sv">Save check-in</button><div id="fb"></div></div><div id="hist"></div>`;
+ let f="";$("#re").onclick=()=>{S={};save();home()};
+ $("#fl").querySelectorAll("button").forEach(b=>b.onclick=()=>{f=b.dataset.f;$("#fl").querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b))});
+ $("#sv").onclick=()=>{if(!f){$("#fb").innerHTML='<p class="small">Pick how your skin feels first.</p>';return}
+  const e={date:today(),d,f,r:$("#rt").value,c1:$("#c1").checked,c2:$("#c2").checked};S.log.push(e);save();const a=advice(f,d);
+  $("#fb").innerHTML=`<div class="now-box" style="margin-top:12px;background:var(--${a[0]==="ok"?"accbg":a[0]==="wn"?"warnbg":"badbg"})"><b>${a[1]}</b></div>`;hist()};hist()}
+function hist(){const L=S.log||[];if(!L.length){$("#hist").innerHTML="";return}
+ const lab=Object.fromEntries(FEEL),rl={1:"Worse",2:"A bit worse",3:"Same",4:"A bit better",5:"Much better"};
+ const flag=L.find(e=>e.r>=4&&(e.c1||e.c2));
+ $("#hist").innerHTML=`<h2>Your log</h2><div class="card">${flag?`<div class="now-box" style="margin:0 0 10px;background:var(--warnbg)"><b>Careful before you credit the product.</b> You noted an improvement while ${flag.c1&&flag.c2?"the season changed and you added another product":flag.c1?"the season changed":"you added another product"}. Keep going and compare again in a couple of weeks.</div>`:""}${L.slice().reverse().map(e=>`<div class="log"><b>Day ${e.d}</b> <span class="small">${e.date}</span><br>${lab[e.f]}${e.r?` · ${rl[e.r]} vs day 1`:""}${e.c1||e.c2?`<br><span class="small">Noted: ${[e.c1&&"season changed",e.c2&&"another product started"].filter(Boolean).join(", ")}</span>`:""}</div>`).join("")}</div>`}
+S.k&&P[S.k]?view():home();
+</script></body></html>
